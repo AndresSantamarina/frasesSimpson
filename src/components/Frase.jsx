@@ -1,11 +1,7 @@
 import Image from "react-bootstrap/Image";
-import bart from "../assets/bart.png"
 import { Container } from "react-bootstrap";
 
 const Frase = ({personaje}) => {
-
-
-
   return (
     <Container className="my-3">
       <h2>{personaje.character}</h2>
