@@ -29,7 +29,7 @@ function App() {
         className="logoSimpsons"
       />
       <Frase personaje={personaje}/>
-      <Button className="mb-3" variant="warning">
+      <Button className="mb-3" variant="warning" onClick={consultarAPI}>
         Obtener frase
       </Button>{" "}
     </Container>
