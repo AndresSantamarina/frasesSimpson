@@ -2,11 +2,12 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./assets/logoSimpsons.png";
 import Frase from "./components/Frase";
-import { Image, Container, Button } from "react-bootstrap";
+import { Image, Container, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 function App() {
   const [personaje, setPersonaje] = useState({});
+  const [mostrarSpinner, setMostrarSpinner] = useState(true);
 
   useEffect(() => {
     consultarAPI();
@@ -14,11 +15,23 @@ function App() {
 
   const consultarAPI = async () => {
     //hacer una petición get a la api
-    const respuesta = await fetch("https://thesimpsonsquoteapi.glitch.me/quotes");
+    const respuesta = await fetch(
+      "https://thesimpsonsquoteapi.glitch.me/quotes"
+    );
     const datos = await respuesta.json();
     console.log(datos[0]);
-    setPersonaje(datos[0]);    
+    setPersonaje(datos[0]);
+    //ocultar el spinner cambiando el valor a false
+    setMostrarSpinner(false);
   };
+  //mostrarSpinner === true es igual a que ponga mostrarSpinner porque es un booleano
+  const mostrarComponente = mostrarSpinner ? (
+    <div className="my-5">
+      <Spinner animation="border" variant="danger" />
+    </div>
+  ) : (
+    <Frase personaje={personaje} />
+  );
 
   return (
     <Container className="text-center my-4">
@@ -28,7 +41,7 @@ function App() {
         fluid
         className="logoSimpsons"
       />
-      <Frase personaje={personaje}/>
+      {mostrarComponente}
       <Button className="mb-3" variant="warning" onClick={consultarAPI}>
         Obtener frase
       </Button>{" "}
