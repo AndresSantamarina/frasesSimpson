@@ -12,6 +12,7 @@ function App() {
   useEffect(() => {
     consultarAPI();
   }, []);
+  //si o si que se actualice en montaje porque sino se actualiza infinitamente 
 
   const consultarAPI = async () => {
     try {
