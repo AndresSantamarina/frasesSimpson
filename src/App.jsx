@@ -14,18 +14,24 @@ function App() {
   }, []);
 
   const consultarAPI = async () => {
-    //mostrar el spinner
-    setMostrarSpinner(true);
-    //hacer una petición get a la api
-    const respuesta = await fetch(
-      "https://thesimpsonsquoteapi.glitch.me/quotes"
-    );
-    const datos = await respuesta.json();
-    console.log(datos[0]);
-    setPersonaje(datos[0]);
-    //ocultar el spinner cambiando el valor a false
-    setMostrarSpinner(false);
+    try {
+      //mostrar el spinner
+      setMostrarSpinner(true);
+      //hacer una petición get a la api
+      const respuesta = await fetch(
+        "https://thesimpsonsquoteapi.glitch.me/quotes"
+      );
+      const datos = await respuesta.json();
+      console.log(datos[0]);
+      setPersonaje(datos[0]);
+      //ocultar el spinner cambiando el valor a false
+      setMostrarSpinner(false);
+    } catch (error) {
+      console.log(error);
+      //agregar un mensaje para el usuario final
+    }
   };
+
   //mostrarSpinner === true es igual a que ponga mostrarSpinner porque es un booleano
   const mostrarComponente = mostrarSpinner ? (
     <div className="my-5">
